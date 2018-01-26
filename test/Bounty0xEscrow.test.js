@@ -11,8 +11,8 @@ contract('Bounty0xEscrow', ([ owner, acct1, acct2, acct3, acct4, acct5 ]) => {
 
     before('get the deployed test token and Bounty0xEscrow', async () => {
         tokenContract = await SimpleToken.deployed();
-        bountyContract = await Bounty0xEscrow.deployed();
         tokenAddress = tokenContract.address;
+        bountyContract = await Bounty0xEscrow.deployed();
     });
 
     it('contracts should be deployed', async () => {
@@ -42,10 +42,18 @@ contract('Bounty0xEscrow', ([ owner, acct1, acct2, acct3, acct4, acct5 ]) => {
     });
 
     it('addSupportedToken can only be called by owner', async () => {
+        let supportedTokensBefore = await bountyContract.getListOfSupportedTokens();
+
         await expectThrow(bountyContract.addSupportedToken(tokenAddress, { from: acct1 }));
         await expectThrow(bountyContract.addSupportedToken(tokenAddress, { from: acct2 }));
         const { logs } = await bountyContract.addSupportedToken(tokenAddress, { from: owner });
         assert.strictEqual(logs.length, 0);
+
+        let supportedTokensAfter = await bountyContract.getListOfSupportedTokens();
+        let isSupported = await bountyContract.tokenIsSupported(tokenAddress);
+        assert.strictEqual(supportedTokensBefore.length + 1, supportedTokensAfter.length);
+        assert.strictEqual(supportedTokensAfter[1], tokenAddress);
+        assert.strictEqual(isSupported, true);
     });
 
     it('supported token should not be added', async () => {
@@ -53,7 +61,7 @@ contract('Bounty0xEscrow', ([ owner, acct1, acct2, acct3, acct4, acct5 ]) => {
     });
 
     it('removeSupportedToken can only be called by owner', async () => {
-        let supportedTokens = await bountyContract.getListOfSupportedTokens();
+        let supportedTokensBefore = await bountyContract.getListOfSupportedTokens();
 
         await expectThrow(bountyContract.removeSupportedToken(tokenAddress, { from: acct1 }));
         await expectThrow(bountyContract.removeSupportedToken(tokenAddress, { from: acct2 }));
@@ -61,7 +69,7 @@ contract('Bounty0xEscrow', ([ owner, acct1, acct2, acct3, acct4, acct5 ]) => {
         assert.strictEqual(logs.length, 0);
 
         let supportedTokensAfter = await bountyContract.getListOfSupportedTokens();
-        assert.strictEqual(supportedTokens.length - 1, supportedTokensAfter.length);
+        assert.strictEqual(supportedTokensBefore.length - 1, supportedTokensAfter.length);
 
         let isSupported = await bountyContract.tokenIsSupported(tokenAddress);
         assert.strictEqual(isSupported, false);
@@ -71,7 +79,7 @@ contract('Bounty0xEscrow', ([ owner, acct1, acct2, acct3, acct4, acct5 ]) => {
         await expectThrow(bountyContract.removeSupportedToken(tokenAddress));
     });
 
-    it('should not deposit token witch is not supported', async () => {
+    it('should not deposit token which is not supported', async () => {
         await expectThrow(bountyContract.depositToken(tokenAddress, 100000));
     });
 
@@ -80,7 +88,7 @@ contract('Bounty0xEscrow', ([ owner, acct1, acct2, acct3, acct4, acct5 ]) => {
         assert.strictEqual(logs.length, 0);
     });
 
-    it('should deposit token witch is supported', async () => {
+    it('should deposit token which is supported', async () => {
         await tokenContract.approve(bountyContract.address, 100000);
         await bountyContract.depositToken(tokenAddress, 100000);
         let balanceDeposited = await bountyContract.tokens(tokenAddress, owner);
