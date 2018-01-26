@@ -1,8 +1,8 @@
 {
   "name": "Bounty0xEscrowContract",
   "version": "1.0.0",
-  "description": "",
-  "main": "truffle-config.js",
+  "description": "Escrow contract based on Zeppelin Contracts",
+  "main": "y",
   "directories": {
     "test": "test"
   },
@@ -21,6 +21,10 @@
   },
   "homepage": "https://github.com/bounty0x/Bounty0xEscrowContract#readme",
   "dependencies": {
+    "ethereumjs-util": "^5.1.2",
+    "ethereumjs-wallet": "^0.6.0",
+    "web3": "^0.18.4",
+    "web3-provider-engine": "^13.3.3",
     "zeppelin-solidity": "1.5.0"
   },
   "devDependencies": {
@@ -31,7 +35,6 @@
     "babel-register": "^6.26.0",
     "chai": "^4.0.2",
     "chai-as-promised": "^7.0.0",
-    "chai-bignumber": "^2.0.0",
-    "ethereumjs-util": "^5.1.2"
+    "chai-bignumber": "^2.0.0"
   }
 }
