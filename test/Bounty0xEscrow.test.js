@@ -103,9 +103,9 @@ contract('Bounty0xEscrow', ([ owner, acct1, acct2, acct3, acct4, acct5 ]) => {
         const amounts = [100, 22, 231, 342, 312, 1231, 1231, 2334, 657, 787, 978, 574, 636, 687, 563, 53, 445, 476, 876, 34, 53, 556, 87, 987, 98, 5, 8, 679, 85, 6, 35, 234, 234, 346, 5, 767, 867, 44, 434, 6546, 57, 56876, 867, 86, 78, 466, 32, 37, 87, 98, 76, 20];
         let totalAmount = amounts.reduce((a, b) => a + b, 0);
 
-        await expectThrow(bountyContract.distributeTokenToAddressesAndAmounts(tokenAddress, owner, totalAmount, addresses, amounts, { from: acct1 }));
-        await expectThrow(bountyContract.distributeTokenToAddressesAndAmounts(tokenAddress, owner, totalAmount, addresses, amounts, { from: acct2 }));
-        const { logs } = await bountyContract.distributeTokenToAddressesAndAmounts(tokenAddress, owner, totalAmount, addresses, amounts, { from: owner });
+        await expectThrow(bountyContract.distributeTokenToAddressesAndAmounts(tokenAddress, owner, addresses, amounts, { from: acct1 }));
+        await expectThrow(bountyContract.distributeTokenToAddressesAndAmounts(tokenAddress, owner, addresses, amounts, { from: acct2 }));
+        const { logs } = await bountyContract.distributeTokenToAddressesAndAmounts(tokenAddress, owner, addresses, amounts, { from: owner });
         assert.strictEqual(logs.length, addresses.length);
 
         for (var i = 0; i < addresses.length; i++) {
@@ -113,7 +113,7 @@ contract('Bounty0xEscrow', ([ owner, acct1, acct2, acct3, acct4, acct5 ]) => {
             assert.equal(amounts[i], balanceOfAddress.toNumber());
         }
 
-        let balanceHostAfterDestribution = 100000 - amounts.reduce((a, b) => a + b, 0);
+        let balanceHostAfterDestribution = 100000 - totalAmount;
         let tokenBalanceHostOnEscrow = await bountyContract.tokens(tokenAddress, owner);
         assert.equal(balanceHostAfterDestribution, tokenBalanceHostOnEscrow.toNumber());
     });

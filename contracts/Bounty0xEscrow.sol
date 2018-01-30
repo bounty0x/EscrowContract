@@ -1,8 +1,9 @@
 pragma solidity ^0.4.18;
 
-import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
 import 'zeppelin-solidity/contracts/math/SafeMath.sol';
+import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
 import 'zeppelin-solidity/contracts/token/ERC20.sol';
+
 
 contract Bounty0xEscrow is Ownable {
 
@@ -26,12 +27,14 @@ contract Bounty0xEscrow is Ownable {
 
     function addSupportedToken(address _token) public onlyOwner {
         require(!tokenIsSupported[_token]);
+
         supportedTokens.push(_token);
         tokenIsSupported[_token] = true;
     }
 
     function removeSupportedToken(address _token) public onlyOwner {
         require(tokenIsSupported[_token]);
+
         for (uint i = 0; i < supportedTokens.length; i++) {
             if (supportedTokens[i] == _token) {
                 var indexOfLastToken = supportedTokens.length - 1;
@@ -52,6 +55,7 @@ contract Bounty0xEscrow is Ownable {
         //remember to call Token(address).approve(this, amount) or this contract will not be able to do the transfer on your behalf.
         require(_token != address(0));
         require(tokenIsSupported[_token]);
+
         require(ERC20(_token).transferFrom(msg.sender, this, _amount));
         tokens[_token][msg.sender] = SafeMath.add(tokens[_token][msg.sender], _amount);
 
@@ -71,17 +75,22 @@ contract Bounty0xEscrow is Ownable {
         Distribution(_token, _host, _hunter, _amount, uint64(now));
     }
 
-    function distributeTokenToAddressesAndAmounts(address _token, address _host, uint256 _totalAmount, address[] _hunters, uint256[] _amounts) external onlyOwner {
+    function distributeTokenToAddressesAndAmounts(address _token, address _host, address[] _hunters, uint256[] _amounts) external onlyOwner {
         require(_token != address(0));
         require(_host != address(0));
         require(_hunters.length == _amounts.length);
         require(tokenIsSupported[_token]);
-        require(tokens[_token][_host] >= _totalAmount);
-
-        tokens[_token][_host] = SafeMath.sub(tokens[_token][_host], _totalAmount);
+       
+        uint256 totalAmount = 0;
+        for (uint j = 0; j < _amounts.length; j++) {
+            totalAmount = SafeMath.add(totalAmount, _amounts[j]);
+        }
+        require(tokens[_token][_host] >= totalAmount);
+        tokens[_token][_host] = SafeMath.sub(tokens[_token][_host], totalAmount);
+       
         for (uint i = 0; i < _hunters.length; i++) {
             require(ERC20(_token).transfer(_hunters[i], _amounts[i]));
-
+ 
             Distribution(_token, _host, _hunters[i], _amounts[i], uint64(now));
         }
     }
