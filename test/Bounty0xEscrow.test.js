@@ -1,22 +1,29 @@
 import expectThrow from './helpers/expectThrow';
 
 const SimpleToken = artifacts.require("SimpleToken");
+const SimpleERC223Token = artifacts.require("SimpleERC223Token");
 const Bounty0xEscrow = artifacts.require("Bounty0xEscrow");
 
 
 contract('Bounty0xEscrow', ([ owner, acct1, acct2, acct3, acct4, acct5 ]) => {
     let tokenContract;
     let tokenAddress;
+    let erc223tokenContract;
+    let erc223tokenAddress;
     let bountyContract;
+
 
     before('get the deployed test token and Bounty0xEscrow', async () => {
         tokenContract = await SimpleToken.deployed();
         tokenAddress = tokenContract.address;
+        erc223tokenContract = await SimpleERC223Token.deployed();
+        erc223tokenAddress = erc223tokenContract.address;
         bountyContract = await Bounty0xEscrow.deployed();
     });
 
     it('contracts should be deployed', async () => {
         assert.strictEqual(typeof tokenContract.address, 'string');
+        assert.strictEqual(typeof erc223tokenContract.address, 'string');
         assert.strictEqual(typeof bountyContract.address, 'string');
     });
 
@@ -133,6 +140,24 @@ contract('Bounty0xEscrow', ([ owner, acct1, acct2, acct3, acct4, acct5 ]) => {
 
         let tokenBalanceHostOnEscrow = await bountyContract.tokens(tokenAddress, owner);
         assert.equal(initialBalanceHost - 100, tokenBalanceHostOnEscrow.toNumber());
+    });
+
+
+    it('should add SimpleERC223Token to supportedTokens', async () => {
+        const { logs } = await bountyContract.addSupportedToken(erc223tokenAddress, { from: owner });
+        assert.strictEqual(logs.length, 0);
+
+        let isSupported = await bountyContract.tokenIsSupported(erc223tokenAddress);
+        assert.strictEqual(isSupported, true);
+    });
+
+    it('should deposit SimpleERC223Token token', async () => {
+        await erc223tokenContract.transfer(bountyContract.address, 1000);
+        let balanceDeposited = await bountyContract.tokens(erc223tokenAddress, owner);
+        assert.strictEqual(balanceDeposited.toNumber(), 1000);
+
+        let bountyContractBalance = await erc223tokenContract.balanceOf(bountyContract.address);
+        assert.strictEqual(bountyContractBalance.toNumber(), 1000);
     });
 
 });
