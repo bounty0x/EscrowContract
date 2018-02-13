@@ -3,9 +3,10 @@ pragma solidity ^0.4.18;
 import 'zeppelin-solidity/contracts/math/SafeMath.sol';
 import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
 import 'zeppelin-solidity/contracts/token/ERC20.sol';
+import './interfaces/ERC223_receiving_contract.sol';
 
 
-contract Bounty0xEscrow is Ownable {
+contract Bounty0xEscrow is Ownable, ERC223ReceivingContract {
 
     using SafeMath for uint256;
 
@@ -51,6 +52,15 @@ contract Bounty0xEscrow is Ownable {
     }
 
 
+    function tokenFallback(address _from, uint _value, bytes _data) public {
+        var _token = msg.sender;
+        require(tokenIsSupported[_token]);
+
+        tokens[_token][_from] = SafeMath.add(tokens[_token][_from], _value);
+        Deposit(_token, _from, _value, tokens[_token][_from]);
+    }
+
+
     function depositToken(address _token, uint _amount) public {
         //remember to call Token(address).approve(this, amount) or this contract will not be able to do the transfer on your behalf.
         require(_token != address(0));
@@ -80,17 +90,17 @@ contract Bounty0xEscrow is Ownable {
         require(_host != address(0));
         require(_hunters.length == _amounts.length);
         require(tokenIsSupported[_token]);
-       
+
         uint256 totalAmount = 0;
         for (uint j = 0; j < _amounts.length; j++) {
             totalAmount = SafeMath.add(totalAmount, _amounts[j]);
         }
         require(tokens[_token][_host] >= totalAmount);
         tokens[_token][_host] = SafeMath.sub(tokens[_token][_host], totalAmount);
-       
+
         for (uint i = 0; i < _hunters.length; i++) {
             require(ERC20(_token).transfer(_hunters[i], _amounts[i]));
- 
+
             Distribution(_token, _host, _hunters[i], _amounts[i], uint64(now));
         }
     }
