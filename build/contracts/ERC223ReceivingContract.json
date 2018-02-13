@@ -1,0 +1,209 @@
+{
+  "contractName": "ERC223ReceivingContract",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        },
+        {
+          "name": "_data",
+          "type": "bytes"
+        }
+      ],
+      "name": "tokenFallback",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.11;\n\n /**\n * @title Contract that will work with ERC223 tokens.\n */\n\ncontract ERC223ReceivingContract {\n/**\n * @dev Standard ERC223 function that will handle incoming token transfers.\n *\n * @param _from  Token sender address.\n * @param _value Amount of tokens.\n * @param _data  Transaction metadata.\n */\n    function tokenFallback(address _from, uint _value, bytes _data);\n}\n",
+  "sourcePath": "/Users/Alexander/Desktop/Bounty0xEscrowContract/contracts/interfaces/ERC223_receiving_contract.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/Users/Alexander/Desktop/Bounty0xEscrowContract/contracts/interfaces/ERC223_receiving_contract.sol",
+      "exportedSymbols": {
+        "ERC223ReceivingContract": [
+          685
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".11"
+          ]
+        },
+        "id": 675,
+        "name": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": "@title Contract that will work with ERC223 tokens.",
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            685
+          ],
+          "name": "ERC223ReceivingContract",
+          "scope": 686
+        },
+        "children": [
+          {
+            "attributes": {
+              "body": null,
+              "constant": false,
+              "implemented": false,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "tokenFallback",
+              "payable": false,
+              "scope": 685,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_from",
+                      "scope": 684,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 676,
+                        "name": "ElementaryTypeName",
+                        "src": "352:7:5"
+                      }
+                    ],
+                    "id": 677,
+                    "name": "VariableDeclaration",
+                    "src": "352:13:5"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_value",
+                      "scope": 684,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 678,
+                        "name": "ElementaryTypeName",
+                        "src": "367:4:5"
+                      }
+                    ],
+                    "id": 679,
+                    "name": "VariableDeclaration",
+                    "src": "367:11:5"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_data",
+                      "scope": 684,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bytes memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes",
+                          "type": "bytes storage pointer"
+                        },
+                        "id": 680,
+                        "name": "ElementaryTypeName",
+                        "src": "380:5:5"
+                      }
+                    ],
+                    "id": 681,
+                    "name": "VariableDeclaration",
+                    "src": "380:11:5"
+                  }
+                ],
+                "id": 682,
+                "name": "ParameterList",
+                "src": "351:41:5"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 683,
+                "name": "ParameterList",
+                "src": "392:0:5"
+              }
+            ],
+            "id": 684,
+            "name": "FunctionDefinition",
+            "src": "329:64:5"
+          }
+        ],
+        "id": 685,
+        "name": "ContractDefinition",
+        "src": "90:305:5"
+      }
+    ],
+    "id": 686,
+    "name": "SourceUnit",
+    "src": "0:396:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-02-13T11:11:04.283Z"
+}
