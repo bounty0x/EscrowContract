@@ -160,4 +160,27 @@ contract('Bounty0xEscrow', ([ owner, acct1, acct2, acct3, acct4, acct5 ]) => {
         assert.strictEqual(bountyContractBalance.toNumber(), 1000);
     });
 
+    it('should receive token which is supported', async () => {
+        let initialBefore = await tokenContract.balanceOf(bountyContract.address);
+        await tokenContract.transfer(bountyContract.address, 100000);
+        let initialAfter = await tokenContract.balanceOf(bountyContract.address);
+        assert.strictEqual(initialAfter.toNumber(), initialBefore.toNumber() + 100000);
+    });
+
+    it('distributeTokenToAddressesAndAmountsWithoutHost can only be called by owner', async () => {
+        const addresses = ['0x1Dc4cf41Ce1f397033DeA502528b753b4D028001', '0xeFAeF3A9b2bC9B1464c1F85715B6915de4EC6591', '0x874c3076A926447A4cD16979D5F532bEa94C9171'];
+        const amounts = [100, 22, 231];
+        let totalAmount = amounts.reduce((a, b) => a + b, 0);
+
+        await expectThrow(bountyContract.distributeTokenToAddressesAndAmountsWithoutHost(tokenAddress, addresses, amounts, { from: acct1 }));
+        await expectThrow(bountyContract.distributeTokenToAddressesAndAmountsWithoutHost(tokenAddress, addresses, amounts, { from: acct2 }));
+        const { logs } = await bountyContract.distributeTokenToAddressesAndAmountsWithoutHost(tokenAddress, addresses, amounts, { from: owner });
+        assert.strictEqual(logs.length, addresses.length);
+
+        for (var i = 0; i < addresses.length; i++) {
+            let balanceOfAddress = await tokenContract.balanceOf(addresses[i]);
+            assert.equal(amounts[i], balanceOfAddress.toNumber());
+        }
+    });
+
 });
