@@ -7,5 +7,5 @@ function NetworkModel(networkId, provider, from, gasLimit, gasPrice) {
     this.provider = provider;
     this.from = from;
     this.gas = gasLimit || 4700000;
-    this.gasPrice = gasPrice || 21000000000;
+    this.gasPrice = gasPrice || 21 * (10 ** 9);
 }

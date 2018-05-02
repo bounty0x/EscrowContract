@@ -31,179 +31,308 @@
   "source": "pragma solidity ^0.4.11;\n\n /**\n * @title Contract that will work with ERC223 tokens.\n */\n\ncontract ERC223ReceivingContract {\n/**\n * @dev Standard ERC223 function that will handle incoming token transfers.\n *\n * @param _from  Token sender address.\n * @param _value Amount of tokens.\n * @param _data  Transaction metadata.\n */\n    function tokenFallback(address _from, uint _value, bytes _data);\n}\n",
   "sourcePath": "/Users/Alexander/Desktop/Bounty0xEscrowContract/contracts/interfaces/ERC223_receiving_contract.sol",
   "ast": {
-    "attributes": {
-      "absolutePath": "/Users/Alexander/Desktop/Bounty0xEscrowContract/contracts/interfaces/ERC223_receiving_contract.sol",
-      "exportedSymbols": {
-        "ERC223ReceivingContract": [
-          625
-        ]
-      }
+    "absolutePath": "/Users/Alexander/Desktop/Bounty0xEscrowContract/contracts/interfaces/ERC223_receiving_contract.sol",
+    "exportedSymbols": {
+      "ERC223ReceivingContract": [
+        752
+      ]
     },
-    "children": [
+    "id": 753,
+    "nodeType": "SourceUnit",
+    "nodes": [
       {
-        "attributes": {
-          "literals": [
-            "solidity",
-            "^",
-            "0.4",
-            ".11"
-          ]
-        },
-        "id": 615,
-        "name": "PragmaDirective",
-        "src": "0:24:1"
+        "id": 742,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".11"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:4"
       },
       {
-        "attributes": {
-          "baseContracts": [
-            null
-          ],
-          "contractDependencies": [
-            null
-          ],
-          "contractKind": "contract",
-          "documentation": "@title Contract that will work with ERC223 tokens.",
-          "fullyImplemented": false,
-          "linearizedBaseContracts": [
-            625
-          ],
-          "name": "ERC223ReceivingContract",
-          "scope": 626
-        },
-        "children": [
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Contract that will work with ERC223 tokens.",
+        "fullyImplemented": false,
+        "id": 752,
+        "linearizedBaseContracts": [
+          752
+        ],
+        "name": "ERC223ReceivingContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
           {
-            "attributes": {
-              "body": null,
-              "constant": false,
-              "implemented": false,
-              "isConstructor": false,
-              "modifiers": [
-                null
-              ],
-              "name": "tokenFallback",
-              "payable": false,
-              "scope": 625,
-              "stateMutability": "nonpayable",
-              "superFunction": null,
-              "visibility": "public"
-            },
-            "children": [
-              {
-                "children": [
-                  {
-                    "attributes": {
-                      "constant": false,
-                      "name": "_from",
-                      "scope": 624,
-                      "stateVariable": false,
-                      "storageLocation": "default",
-                      "type": "address",
-                      "value": null,
-                      "visibility": "internal"
-                    },
-                    "children": [
-                      {
-                        "attributes": {
-                          "name": "address",
-                          "type": "address"
-                        },
-                        "id": 616,
-                        "name": "ElementaryTypeName",
-                        "src": "352:7:1"
-                      }
-                    ],
-                    "id": 617,
-                    "name": "VariableDeclaration",
-                    "src": "352:13:1"
+            "body": null,
+            "documentation": "@dev Standard ERC223 function that will handle incoming token transfers.\n * @param _from  Token sender address.\n@param _value Amount of tokens.\n@param _data  Transaction metadata.",
+            "id": 751,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "tokenFallback",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 749,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 744,
+                  "name": "_from",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 751,
+                  "src": "352:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
                   },
-                  {
-                    "attributes": {
-                      "constant": false,
-                      "name": "_value",
-                      "scope": 624,
-                      "stateVariable": false,
-                      "storageLocation": "default",
-                      "type": "uint256",
-                      "value": null,
-                      "visibility": "internal"
-                    },
-                    "children": [
-                      {
-                        "attributes": {
-                          "name": "uint",
-                          "type": "uint256"
-                        },
-                        "id": 618,
-                        "name": "ElementaryTypeName",
-                        "src": "367:4:1"
-                      }
-                    ],
-                    "id": 619,
-                    "name": "VariableDeclaration",
-                    "src": "367:11:1"
+                  "typeName": {
+                    "id": 743,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "352:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
                   },
-                  {
-                    "attributes": {
-                      "constant": false,
-                      "name": "_data",
-                      "scope": 624,
-                      "stateVariable": false,
-                      "storageLocation": "default",
-                      "type": "bytes memory",
-                      "value": null,
-                      "visibility": "internal"
-                    },
-                    "children": [
-                      {
-                        "attributes": {
-                          "name": "bytes",
-                          "type": "bytes storage pointer"
-                        },
-                        "id": 620,
-                        "name": "ElementaryTypeName",
-                        "src": "380:5:1"
-                      }
-                    ],
-                    "id": 621,
-                    "name": "VariableDeclaration",
-                    "src": "380:11:1"
-                  }
-                ],
-                "id": 622,
-                "name": "ParameterList",
-                "src": "351:41:1"
-              },
-              {
-                "attributes": {
-                  "parameters": [
-                    null
-                  ]
+                  "value": null,
+                  "visibility": "internal"
                 },
-                "children": [],
-                "id": 623,
-                "name": "ParameterList",
-                "src": "392:0:1"
-              }
-            ],
-            "id": 624,
-            "name": "FunctionDefinition",
-            "src": "329:64:1"
+                {
+                  "constant": false,
+                  "id": 746,
+                  "name": "_value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 751,
+                  "src": "367:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 745,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "367:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 748,
+                  "name": "_data",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 751,
+                  "src": "380:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 747,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "380:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "351:41:4"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 750,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "392:0:4"
+            },
+            "scope": 752,
+            "src": "329:64:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
           }
         ],
-        "id": 625,
-        "name": "ContractDefinition",
-        "src": "90:305:1"
+        "scope": 753,
+        "src": "90:305:4"
       }
     ],
-    "id": 626,
-    "name": "SourceUnit",
-    "src": "0:396:1"
+    "src": "0:396:4"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/Alexander/Desktop/Bounty0xEscrowContract/contracts/interfaces/ERC223_receiving_contract.sol",
+    "exportedSymbols": {
+      "ERC223ReceivingContract": [
+        752
+      ]
+    },
+    "id": 753,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 742,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".11"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:4"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Contract that will work with ERC223 tokens.",
+        "fullyImplemented": false,
+        "id": 752,
+        "linearizedBaseContracts": [
+          752
+        ],
+        "name": "ERC223ReceivingContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Standard ERC223 function that will handle incoming token transfers.\n * @param _from  Token sender address.\n@param _value Amount of tokens.\n@param _data  Transaction metadata.",
+            "id": 751,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "tokenFallback",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 749,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 744,
+                  "name": "_from",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 751,
+                  "src": "352:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 743,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "352:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 746,
+                  "name": "_value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 751,
+                  "src": "367:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 745,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "367:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 748,
+                  "name": "_data",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 751,
+                  "src": "380:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 747,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "380:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "351:41:4"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 750,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "392:0:4"
+            },
+            "scope": 752,
+            "src": "329:64:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 753,
+        "src": "90:305:4"
+      }
+    ],
+    "src": "0:396:4"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+    "version": "0.4.23+commit.124ca40d.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "1.0.1",
-  "updatedAt": "2018-03-03T10:04:24.307Z"
+  "schemaVersion": "2.0.0",
+  "updatedAt": "2018-05-02T12:21:33.212Z"
 }
