@@ -88,10 +88,26 @@ contract Bounty0xEscrow is Ownable, ERC223ReceivingContract, Pausable {
         }
     }
     
+    function distributeWithTransferFrom(address _token, address _ownerOfTokens, address[] _hunters, uint256[] _amounts) external onlyOwner {
+        require(_token != address(0));
+        require(_hunters.length == _amounts.length);
+
+        uint256 totalAmount = 0;
+        for (uint j = 0; j < _amounts.length; j++) {
+            totalAmount = SafeMath.add(totalAmount, _amounts[j]);
+        }
+        require(ERC20(_token).allowance(_ownerOfTokens, this) >= totalAmount);
+
+        for (uint i = 0; i < _hunters.length; i++) {
+            require(ERC20(_token).transferFrom(_ownerOfTokens, _hunters[i], _amounts[i]));
+
+            emit Distribution(_token, this, _hunters[i], _amounts[i], uint64(now));
+        }
+    }
+    
     // in case of emergency
-    function pullOutToken(address _token, address _receiver, uint256 _amount) external onlyOwner {
-        ERC20(_token).transfer(_receiver, _amount);
+    function approveToPullOutTokens(address _token, address _receiver, uint256 _amount) external onlyOwner {
+        ERC20(_token).approve(_receiver, _amount);
     }
     
 }
-
